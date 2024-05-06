@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trenul Galben fara Cai</title>
+    <link rel="stylesheet" href="/static/bulma.min.css">
+    <link rel="stylesheet" href="/static/tgfc.css">
+  </head>
+  <body>
+  <section class="section">
+    <div class="container" >
+      <h1 class="title">
+        Trenul Galben fara Cai
+      </h1>
+      <p class="subtitle">
+        Acest site este un joc unde trebuie sa recunosti statiile de metrou bucurestene.
+      </p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="notification is-{{category}}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+      <div class="box">
+        <img src="/static/pictures/{{photo['filename']}}.png" style="width: 100%" class="rounded-4">
+        <form method="POST">
+            <div class="select is-fullwidth">
+                <select name="station">
+                    {{stations}}
+                    {% for station in stations %}
+                    <option>{{ station }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="hidden" name="realstation" value="{{ photo['station'] }}">
+            <button class="button is-principal is-fullwidth mt-5">Asta-i statia!</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  </body>
+</html>
